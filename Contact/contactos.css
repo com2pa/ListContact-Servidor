@@ -133,7 +133,8 @@ ul {
 }
 
 .check-todo {
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
+  border:1px solid yellow;
 }
 .info-name , .info-number{
   display: none;
