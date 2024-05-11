@@ -77,7 +77,7 @@ form.addEventListener('submit' , async e =>{
 
     const listItem = document.createElement('li')
     listItem.innerHTML=`
-        <li class="todo-item">
+        <li class="todo-item" id="${response.id}">
             <button class="delete-btn">&#10006;</button>
                 <span>${response.nombre}</span> <span>${response.telefono}</span>
             <button class="edit-btn">&#x270E;</button>
@@ -102,7 +102,7 @@ const getContact = async()=>{
     userContacts.forEach(contac => {
         const listItem = document.createElement('li')
         listItem.innerHTML=`
-            <li class="todo-item">
+            <li class="todo-item" id="${contac.id}">
                 <button class="delete-btn">&#10006;</button>
                     <span>${contac.nombre}</span> <span>${contac.telefono}</span>
                 <button class="edit-btn">&#x270E;</button>
@@ -116,22 +116,23 @@ getContact();
 
 // funcion para eliminar y editar
 
-// todosList.addEventListener('click', async e=>{
-//     // eliminar por id
+todosList.addEventListener('click', async e=>{
+    // eliminar por id
     
-//     if(e.target.classList.contains('delete-btn')){
-//         // buscar por id
-//         const id=e.target.parentElement.id
+    if(e.target.classList.contains('delete-btn')){
+        // buscar por id
+        const id=e.target.parentElement.id
     
-//         await fetch(`http://localhost:3000/Contactos/${id}`,{
-//             method:'DELETE'
-//         })
+        await fetch(`http://localhost:3000/Contactos/${id}`,{
+            method:'DELETE'
+        })
         
-//         // borrando del html
-//         e.target.parentElement.remove()
+        // borrando del html
+        e.target.parentElement.remove()
 
-//     }else if(e.target.classList.contains('edit-btn')){
-//         const id= e.target.parentElement.id;
-//     }
+    }
+    // else if(e.target.classList.contains('edit-btn')){
+    //     const id= e.target.parentElement.id;
+    // }
 
-// })
+})
