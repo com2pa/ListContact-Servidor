@@ -5,5 +5,30 @@
       "username": "merwil"
     }
   ],
-  "Contactos": []
+  "Contactos": [
+    {
+      "id": "2c07",
+      "nombre": "Merwil Vegas",
+      "telefono": "04142016224",
+      "edit": false
+    },
+    {
+      "id": "652f",
+      "nombre": "Diego Vegas",
+      "telefono": "04124567894",
+      "edit": false
+    },
+    {
+      "id": "c8be",
+      "nombre": "Daniel Perez",
+      "telefono": "04127894561",
+      "edit": false
+    },
+    {
+      "id": "e6ae",
+      "nombre": "Enrique Dejesus",
+      "telefono": "04163698521",
+      "edit": false
+    }
+  ]
 }
