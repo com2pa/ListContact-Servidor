@@ -7,27 +7,15 @@
   ],
   "Contactos": [
     {
-      "id": "2c07",
+      "id": "97d6",
       "nombre": "Merwil Vegas",
-      "telefono": "04142016224",
+      "telefono": "02128588624",
       "edit": false
     },
     {
-      "id": "652f",
+      "id": "bac0",
       "nombre": "Diego Vegas",
-      "telefono": "04124567894",
-      "edit": false
-    },
-    {
-      "id": "c8be",
-      "nombre": "Daniel Perez",
-      "telefono": "04127894561",
-      "edit": false
-    },
-    {
-      "id": "e6ae",
-      "nombre": "Enrique Dejesus",
-      "telefono": "04163698521",
+      "telefono": "04167222504",
       "edit": false
     }
   ]
