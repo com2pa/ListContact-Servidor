@@ -86,8 +86,9 @@ ul {
   max-height: 10rem;
   overflow: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
+  display: block;
 }
 
 .todo-item {
@@ -113,7 +114,7 @@ ul {
   color: #fee2e2;
 }
 
-.check-btn {
+.edit-btn {
   padding: 0.5rem;
   border-radius: 0rem 0.5rem 0.5rem 0rem;
   background-color: #4ade80;
