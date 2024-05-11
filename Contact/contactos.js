@@ -79,7 +79,7 @@ form.addEventListener('submit' , async e =>{
     listItem.innerHTML=`
         <li class="todo-item" id="${response.id}">
             <button class="delete-btn">&#10006;</button>
-                <span>${response.nombre}</span> <span>${response.telefono}</span>
+                <span class="${nameEditValidation? 'correct' : 'incorrect'}" contenteditable="true">${response.nombre}</span> "><span class="${numberEditvalidation? 'correct' : 'incorrect'}" contenteditable="true">${response.telefono}</span>
             <button class="edit-btn">&#x270E;</button>
         </li>
     `
@@ -104,11 +104,13 @@ const getContact = async()=>{
         listItem.innerHTML=`
             <li class="todo-item" id="${contac.id}">
                 <button class="delete-btn">&#10006;</button>
-                    <span>${contac.nombre}</span> <span>${contac.telefono}</span>
+                    <span class="${nameEditValidation? 'correct' : 'incorrect'}" contenteditable="true" >${contac.nombre}</span> <span class="${numberEditvalidation? 'correct' : 'incorrect'}" contenteditable="true" >${contac.telefono}</span>
                 <button class="edit-btn">&#x270E;</button>
             </li>
         `
         todosList.append(listItem)
+        // class="${nameEditValidation? 'correct' : 'incorrect'}" contenteditable="true"
+        // class="${numberEditvalidation? 'correct' : 'incorrect'}" contenteditable="true"
     });
 }
 getContact();
@@ -118,7 +120,8 @@ getContact();
 
 todosList.addEventListener('click', async e=>{
     // eliminar por id
-    
+    const editBtn = e.target.closest('.edit-btn');
+
     if(e.target.classList.contains('delete-btn')){
         // buscar por id
         const id=e.target.parentElement.id
@@ -130,9 +133,71 @@ todosList.addEventListener('click', async e=>{
         // borrando del html
         e.target.parentElement.remove()
 
-    }
-    // else if(e.target.classList.contains('edit-btn')){
-    //     const id= e.target.parentElement.id;
-    // }
+    }else if(e.target.classList.contains('edit-btn')){
+         const id= e.target.parentElement.id;
+         const editBtn = e.target.parentElement.querySelector('.edit-btn');
+         const nameEdit =e.target.parentElement.children[1];
+         const numberEdit = e.target.parentElement.children[2];
+         console.log(editBtn);
+         
+    console.log(nameEdit,inputNumber);
+        await fetch(`http://localhost:3000/Contactos/${id}`,{
+            method:'PATCH',
+            
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                edit:nameEdit.classList.contains('check-todo') && numberEdit.classList.contains('check-todo')  ?false : true,
+                nombre:nameEdit.innerHTML ,
+                telefono:numberEdit.innerHTML 
+            })
+        });
+        // 
+         nameEdit.classList.toggle('check-todo')
+         numberEdit.classList.toggle('check-todo')
+         
+        // nameEdit.setAttribute('contenteditable', 'true');
+        // numberEdit.setAttribute('contenteditable', 'true');    
 
+        
+            
+            
+            
+            
+            nameEdit.addEventListener('input', e=>{
+                nameEditValidation = REGEX_NAME.test(nameEdit.value)
+                validationInput(nameEdit, nameEditValidation)
+                if (nameEditValidation && numberEditvalidation) {
+                    editBtn.disabled = false;
+                    
+                        
+                } else {
+                    editBtn.disabled = true;
+                    
+            
+                }
+            })
+        
+       
+
+
+        numberEdit.addEventListener('input',e=>{
+            numberEditvalidation = REGEX_NUMBER.test(numberEdit.value)
+            validationInput(numberEdit, numberEditvalidation)
+            if (nameEditValidation && numberEditvalidation) {
+                editBtn.disabled = false;
+                
+                   
+            } else {
+                editBtn.disabled = true;
+            }    
+        });
+        
+
+        
+
+    }
+    
 })
+
