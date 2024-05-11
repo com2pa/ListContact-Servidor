@@ -6,8 +6,9 @@ const form=document.querySelector('#form-todos')
 const formInput= document.querySelector('#form-input')//nombre y apellido
 const inputNumber=document.querySelector('#input-number') // num telf.
 const formBtn = document.querySelector('#form-btn')//boton
+const todosList = document.querySelector('#todos-list') //ul
 
-
+const user = JSON.parse(localStorage.getItem('user'))
 // validacion
                         // no existe datos - validando en el input
 let namevalidation= false; //nombre y apellido
@@ -54,3 +55,83 @@ inputNumber.addEventListener('input', e => {
     numbervalidation = REGEX_NUMBER.test(inputNumber.value)
     validationInput(inputNumber, numbervalidation)
 })
+
+
+form.addEventListener('submit' , async e =>{
+    e.preventDefault()
+
+    // llevar a la base de datos
+    const responseJSON = await fetch(`http://localhost:3000/Contactos`,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            nombre:formInput.value,
+            telefono:inputNumber.value,
+            edit:false
+        })
+    })
+    const response = await responseJSON.json()
+    console.log(response)
+
+    const listItem = document.createElement('li')
+    listItem.innerHTML=`
+        <li class="todo-item">
+            <button class="delete-btn">&#10006;</button>
+                <span>${response.nombre}</span> <span>${response.telefono}</span>
+            <button class="edit-btn">&#x270E;</button>
+        </li>
+    `
+    todosList.append(listItem)
+    formInput.value=''
+    inputNumber.value=''
+}) 
+
+// funcion asincrona para que cuando carge la pagina no se borre los contactos
+const getContact = async()=>{
+    const response = await fetch(`http://localhost:3000/Contactos`,{method:'GET'})
+    const contacts = await response.json()
+    console.log(contacts); 
+    // console.log(user.username);
+    // console.log(contact.nombre , contact.telefono);
+    
+    let userContacts = contacts.filter(contact => user == user.username);
+    userContacts = contacts // revisar aqui ! el filtro 
+    console.log(userContacts);
+    userContacts.forEach(contac => {
+        const listItem = document.createElement('li')
+        listItem.innerHTML=`
+            <li class="todo-item">
+                <button class="delete-btn">&#10006;</button>
+                    <span>${contac.nombre}</span> <span>${contac.telefono}</span>
+                <button class="edit-btn">&#x270E;</button>
+            </li>
+        `
+        todosList.append(listItem)
+    });
+}
+getContact();
+
+
+// funcion para eliminar y editar
+
+// todosList.addEventListener('click', async e=>{
+//     // eliminar por id
+    
+//     if(e.target.classList.contains('delete-btn')){
+//         // buscar por id
+//         const id=e.target.parentElement.id
+    
+//         await fetch(`http://localhost:3000/Contactos/${id}`,{
+//             method:'DELETE'
+//         })
+        
+//         // borrando del html
+//         e.target.parentElement.remove()
+
+//     }else if(e.target.classList.contains('edit-btn')){
+//         const id= e.target.parentElement.id;
+//     }
+
+// })
