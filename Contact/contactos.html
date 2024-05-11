@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="contactos.css">
+  <title>ListContact</title>
+</head>
+<body>
+  <p class="notification"></p>
+  <h1 id="title">Contactos</h1>
+  <div id="container">
+    <form id="form-todos">
+      <div>
+        <input type="text" placeholder="Ingresa tu nombre y Apellido" id="form-input">
+        <p class="info-name">
+          Nombre y apellido <br>
+          Tanto el nombre como el apellido empiezan con mayusculas
+        </p>
+      </div>
+      <div>
+        <input type="text" id="input-number" placeholder="0414-123-45-67" class="form-input-number">
+        <p class="info-number">
+          Tiene que ser un numero valido venezolano <br>
+        </p>  
+      </div>
+      <button id="form-btn">Añadir</button>
+    </form>
+    <ul id="todos-list">
+      <!-- <li class="todo-item">
+        <button class="delete-btn">&#10006;</button>
+        Holaas
+        <button class="check-btn">&#10003;</button>
+      </li> -->
+    </ul>
+    <button id="cerrar-btn">Cerrar sesión</button>
+  </div>
+  <script src="contactos.js"></script>
+</body>
+</html>
