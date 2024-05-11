@@ -52,7 +52,7 @@ form {
   gap: 1rem;
 }
 
-#form-input, .form-input-number {
+#form-input, #input-number {
   background-color: #475569;
   border-radius: 0.5rem;
   outline: none;
@@ -60,7 +60,7 @@ form {
   color: #f1f5f9;
 }
 
-#form-input::placeholder, .form-input-number::placeholder {
+#form-input::placeholder, #input-number::placeholder {
   color: #cbd5e1;
 }
 
@@ -136,4 +136,18 @@ ul {
 }
 .info-name , .info-number{
   display: none;
+}
+
+.correct {
+  outline: 2px solid green!important;
+}
+
+.incorrect {
+  outline: 2px solid red!important;
+}
+.show-info {
+  display: block;
+}
+.active{
+  background-color:green!important;
 }
