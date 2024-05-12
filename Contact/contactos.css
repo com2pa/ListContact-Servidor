@@ -145,11 +145,14 @@ ul {
 }
 
 .incorrect {
-  outline: 2px solid red!important;
+  outline: 2px solid red;
 }
 .show-info {
   display: block;
 }
 .active{
   background-color:green!important;
+}
+.editando{
+  background-color:aqua;
 }
