@@ -7,6 +7,7 @@ const formInput= document.querySelector('#form-input')//nombre y apellido
 const inputNumber=document.querySelector('#input-number') // num telf.
 const formBtn = document.querySelector('#form-btn')//boton
 const todosList = document.querySelector('#todos-list') //ul
+const closeBtn= document.querySelector('#cerrar-btn')//cerrar sesion
 
 const user = JSON.parse(localStorage.getItem('user'))
 // validacion
@@ -79,7 +80,7 @@ form.addEventListener('submit' , async e =>{
     listItem.innerHTML=`
         <li class="todo-item" id="${response.id}">
             <button class="delete-btn">&#10006;</button>
-                <span class="${nameEditValidation? 'correct' : 'incorrect'}" contenteditable="true">${response.nombre}</span> "><span class="${numberEditvalidation? 'correct' : 'incorrect'}" contenteditable="true">${response.telefono}</span>
+                <span>${response.nombre}</span> <span>${response.telefono}</span>
             <button class="edit-btn">&#x270E;</button>
         </li>
     `
@@ -104,7 +105,8 @@ const getContact = async()=>{
         listItem.innerHTML=`
             <li class="todo-item" id="${contac.id}">
                 <button class="delete-btn">&#10006;</button>
-                    <span class="${nameEditValidation? 'correct' : 'incorrect'}" contenteditable="true" >${contac.nombre}</span> <span class="${numberEditvalidation? 'correct' : 'incorrect'}" contenteditable="true" >${contac.telefono}</span>
+                    <span class"${nameEditValidation? 'incorrect' : 'correct'}">${contac.nombre}</span> <span>${contac.telefono}</span>          
+                      
                 <button class="edit-btn">&#x270E;</button>
             </li>
         `
@@ -120,7 +122,7 @@ getContact();
 
 todosList.addEventListener('click', async e=>{
     // eliminar por id
-    const editBtn = e.target.closest('.edit-btn');
+    
 
     if(e.target.classList.contains('delete-btn')){
         // buscar por id
@@ -135,64 +137,111 @@ todosList.addEventListener('click', async e=>{
 
     }else if(e.target.classList.contains('edit-btn')){
          const id= e.target.parentElement.id;
-         const editBtn = e.target.parentElement.querySelector('.edit-btn');
-         const nameEdit =e.target.parentElement.children[1];
-         const numberEdit = e.target.parentElement.children[2];
-         console.log(editBtn);
+        //  const editBtn = e.target.parentElement.querySelector('.edit-btn');
          
-    console.log(nameEdit,inputNumber);
-        await fetch(`http://localhost:3000/Contactos/${id}`,{
-            method:'PATCH',
-            
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({
-                edit:nameEdit.classList.contains('check-todo') && numberEdit.classList.contains('check-todo')  ?false : true,
-                nombre:nameEdit.innerHTML ,
-                telefono:numberEdit.innerHTML 
-            })
-        });
-        // 
-         nameEdit.classList.toggle('check-todo')
-         numberEdit.classList.toggle('check-todo')
-         
-        // nameEdit.setAttribute('contenteditable', 'true');
-        // numberEdit.setAttribute('contenteditable', 'true');    
+        //  const editBtn = e.target.parentElement.querySelector('.edit-btn');
+        const editBtn = e.target.closest('.edit-btn');
+        const nameEdit =e.target.parentElement.children[1];
+        const numberEdit = e.target.parentElement.children[2];
 
-        
-            
-            
-            
-            
-            nameEdit.addEventListener('input', e=>{
-                nameEditValidation = REGEX_NAME.test(nameEdit.value)
-                validationInput(nameEdit, nameEditValidation)
-                if (nameEditValidation && numberEditvalidation) {
-                    editBtn.disabled = false;
-                    
-                        
-                } else {
-                    editBtn.disabled = true;
-                    
-            
-                }
-            })
-        
-       
-
-
-        numberEdit.addEventListener('input',e=>{
-            numberEditvalidation = REGEX_NUMBER.test(numberEdit.value)
-            validationInput(numberEdit, numberEditvalidation)
-            if (nameEditValidation && numberEditvalidation) {
-                editBtn.disabled = false;
+       await fetch(`http://localhost:3000/Contactos/${id}`,{
+                method:'PATCH',
                 
-                   
-            } else {
-                editBtn.disabled = true;
-            }    
-        });
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    edit:nameEdit.classList.contains('check-todo') && numberEdit.classList.contains('check-todo')  ?false : true,
+                    nombre:nameEdit.innerHTML ,
+                    telefono:numberEdit.innerHTML 
+                })
+            });
+            nameEdit.classList.toggle('check-todo')
+            numberEdit.classList.toggle('check-todo')
+        if (editBtn){
+            const li = editBtn.parentElement;
+            console.log(li);
+            const nameEdit_1= li.children[1]
+            console.log(nameEdit_1);
+            const numberEdit_1= li.children[2]
+                if (li.classList.contains('editando')){
+                li.classList.remove('editando')
+
+                contacts=contacts.map(contact=>{
+                    if(contact.id == li.id){
+                        return{
+                            id:contact.id,
+                            nombre:nameEdit_1.innerHTML,
+                            telefono:numberEdit_1.innerHTML,
+                            edit:false
+                        }
+                    }
+                    return contact
+                })
+                
+                    editBtn.innerHTML = '&#x270E;'
+                }else{
+                    li.classList.add('editando')
+                    nameEdit.setAttribute('contenteditable', 'true');
+                    numberEdit.setAttribute('contenteditable', 'true');
+                    // nameEdit.classList.toggle('check-todo')
+                    // numberEdit.classList.toggle('check-todo')
+                    editBtn.innerHTML = '&#10000;'
+
+                    nameEdit.addEventListener('input',e=>{
+                        nameEditValidation = REGEX_NAME.test(nameEdit.innerHTML )
+                        validationInput(nameEdit, nameEditValidation)
+                        if (nameEditValidation && numberEditvalidation) {
+                          editBtn.disabled = false;
+                          
+                             
+                        } else {
+                          editBtn.disabled = true;
+                          
+                
+                        }
+                      });
+
+
+                      numberEdit.addEventListener('input',e=>{
+                        numberEditvalidation = REGEX_NUMBER.test(numberEdit.innerHTML)
+                        validationInput(numberEdit, numberEditvalidation)
+                        // const infoText = li.parentElement.children[3]
+                        // console.log(infoText)
+                        // console.log()       
+                        if (nameEditValidation && numberEditvalidation) {
+                          editBtn.disabled = false;
+                          // infoText.classList.add('show-info');
+                          
+                             
+                        } else {
+                          editBtn.disabled = true;
+                          
+                        }
+                      })
+
+                }
+            
+           
+
+            
+            
+            
+         
+            
+           
+           
+         
+        }else{
+            nameEdit.removeAttribute('contenteditable','true');
+            numberEdit.removeAttribute('contenteditable','true');
+        }
+         
+
+        
+            
+            
+            
         
 
         
@@ -201,3 +250,14 @@ todosList.addEventListener('click', async e=>{
     
 })
 
+// cerrando session 
+// paso 11
+
+closeBtn.addEventListener('click',async e =>{
+    // paso 12 
+    // borrarlo del localStoger
+    localStorage.removeItem('user')
+    // paso 13
+    window.location.href='../home/index.html';
+    
+});
