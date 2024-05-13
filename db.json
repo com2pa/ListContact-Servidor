@@ -7,16 +7,10 @@
   ],
   "Contactos": [
     {
-      "id": "b87d",
-      "nombre": "Merwil Vehass",
-      "telefono": "04127894588",
+      "id": "9556",
+      "nombre": "Merwil Vegas",
+      "telefono": "02124567894",
       "edit": false
-    },
-    {
-      "id": "6e46",
-      "nombre": "Enrique Dejesus",
-      "telefono": "04127894561",
-      "edit": true
     }
   ]
 }
