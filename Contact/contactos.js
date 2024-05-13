@@ -8,7 +8,7 @@ const inputNumber=document.querySelector('#input-number') // num telf.
 const formBtn = document.querySelector('#form-btn')//boton
 const todosList = document.querySelector('#todos-list') //ul
 const closeBtn= document.querySelector('#cerrar-btn')//cerrar sesion
-
+const notification = document.querySelector('.notification')
 const user = JSON.parse(localStorage.getItem('user'))
 // validacion
                         // no existe datos - validando en el input
@@ -77,6 +77,13 @@ form.addEventListener('submit' , async e =>{
     console.log(response)
 
     const listItem = document.createElement('li')
+
+    notification.innerHTML='Se añadio un contacto !'
+    notification.classList.add('show-notification')
+    setTimeout(() => {
+        notification.classList.remove('show-notification')
+    }, 5000);
+
     listItem.innerHTML=`
         <li class="todo-item" id="${response.id}">
             <button class="delete-btn">&#10006;</button>
@@ -131,7 +138,11 @@ todosList.addEventListener('click', async e=>{
         await fetch(`http://localhost:3000/Contactos/${id}`,{
             method:'DELETE'
         })
-        
+        notification.innerHTML='Se Elimino un contacto  !'
+        notification.classList.add('show-notification')
+        setTimeout(() => {
+            notification.classList.remove('show-notification')
+        }, 3000);
         // borrando del html
         e.target.parentElement.remove()
 
@@ -161,9 +172,9 @@ todosList.addEventListener('click', async e=>{
         if (editBtn){
             const li = editBtn.parentElement;
             console.log(li);
-            const nameEdit_1= li.children[1]
-            console.log(nameEdit_1);
-            const numberEdit_1= li.children[2]
+            const nameEdit_1= li.children[1].innerHTML
+            console.log(nameEdit_1,'aqui');
+            const numberEdit_1= li.children[2].innerHTML
                 if (li.classList.contains('editando')){
                 li.classList.remove('editando')
 
@@ -178,8 +189,7 @@ todosList.addEventListener('click', async e=>{
                     }
                     return contact
                 })
-                
-                    editBtn.innerHTML = '&#x270E;'
+                    
                 }else{
                     li.classList.add('editando')
                     nameEdit.setAttribute('contenteditable', 'true');
@@ -187,6 +197,12 @@ todosList.addEventListener('click', async e=>{
                     // nameEdit.classList.toggle('check-todo')
                     // numberEdit.classList.toggle('check-todo')
                     editBtn.innerHTML = '&#10000;'
+                   
+                    notification.innerHTML=`Se va editar un contacto ! ${nameEdit_1} ${numberEdit_1} `
+                    notification.classList.add('show-notification')
+                    setTimeout(() => {
+                        notification.classList.remove('show-notification')
+                    }, 3000);
 
                     nameEdit.addEventListener('input',e=>{
                         nameEditValidation = REGEX_NAME.test(nameEdit.innerHTML )
@@ -219,7 +235,9 @@ todosList.addEventListener('click', async e=>{
                           
                         }
                       })
-
+                      
+                      
+                    
                 }
             
            
