@@ -93,7 +93,9 @@ ul {
   gap: 0.5rem;
   display: block;
 }
-
+li{
+  margin-top: 1rem;
+}
 .todo-item {
   display: flex;
   justify-content: space-between;
@@ -101,6 +103,7 @@ ul {
   color: #334155;
   background-color: #e2e8f0;
   border-radius: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .delete-btn {
@@ -153,7 +156,7 @@ ul {
 }
 
 .correct {
-  outline: 2px solid green!important;
+  outline: 2px solid green;
 }
 
 .incorrect {
@@ -161,10 +164,76 @@ ul {
 }
 .show-info {
   display: block;
+  font-size: 0.9rem;
+  margin-top: 0.9rem;
 }
 .active{
-  background-color:green!important;
+  background-color:green;
 }
 .editando{
   background-color:aqua;
 }
+@media(min-width:768px){
+  form{
+    flex-direction: row;
+  }
+  .todo-item{
+    font-size: 1.2rem;
+  }
+  .edit-btn, .delete-btn{
+    font-size: 1.5rem;
+  }
+  .info-name, .info-number{
+    font-size: .9rem;
+  }
+  #form-input, #input-number{
+    font-size: 1.2rem;
+  } 
+  .cerrar-btn {
+    font-size: 1.2rem;
+  }
+  
+}
+@media(min-width:1024px){
+  #title{
+    font-size: 4rem;
+  }
+  .info-name, .info-number{
+    font-size: 1rem;
+  }
+  #form-input, #input-number{
+    font-size:1.5rem;
+  }
+  .todo-item {
+    font-size: 1.5rem;
+  }
+}
+
+@media(min-width:1440px){
+  #title{
+    font-size: 6rem;
+  }
+  .info-name, .info-number{
+    font-size: 1.5rem;
+  }
+  #form-input, #input-number{
+    font-size:1.9rem;
+  }
+  #form-btn {
+    font-size: 1.9rem;
+    padding: 0.5rem 2rem; 
+  }
+  .todo-item {
+    font-size: 1.9rem;
+  }
+  .edit-btn, .delete-btn{
+    font-size: 2rem;
+  }
+  .cerrar-btn {
+    font-size: 1.6rem;
+  }
+  
+}
+/* @media(min-width:2560px){
+
+} */
