@@ -23,8 +23,8 @@ body {
 
 .notification {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 5rem;
+  /* right: 1rem; */
   padding: 1rem;
   background-color: #4338ca;
   border-radius: 0.5rem;
@@ -156,11 +156,11 @@ li{
 }
 
 .correct {
-  outline: 2px solid green;
+  outline: 2px solid green!important;
 }
 
 .incorrect {
-  outline: 2px solid red;
+  outline: 2px solid red!important;
 }
 .show-info {
   display: block;
@@ -189,6 +189,9 @@ li{
   #form-input, #input-number{
     font-size: 1.2rem;
   } 
+  .notification {
+    top: 5rem;
+  }
   .cerrar-btn {
     font-size: 1.2rem;
   }
@@ -207,11 +210,21 @@ li{
   .todo-item {
     font-size: 1.5rem;
   }
+  .notification {
+    top: 5rem;
+    font-size: 1.5rem;
+  }
+  ul{
+    max-height: 13rem;
+  }
 }
 
 @media(min-width:1440px){
   #title{
     font-size: 6rem;
+  }
+  #container {
+    gap:2rem;
   }
   .info-name, .info-number{
     font-size: 1.5rem;
@@ -231,6 +244,13 @@ li{
   }
   .cerrar-btn {
     font-size: 1.6rem;
+  }
+  .notification {
+    top:5rem;
+    font-size: 2rem;
+  }
+  ul{
+    max-height: 13rem;
   }
   
 }
