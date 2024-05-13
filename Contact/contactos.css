@@ -40,6 +40,7 @@ body {
   padding: 1rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   border-radius: 0.5rem;
+  
 }
 
 #title {
@@ -50,6 +51,7 @@ body {
 form {
   display: flex;
   gap: 1rem;
+  flex-direction: column;
 }
 
 #form-input, #input-number {
@@ -58,6 +60,7 @@ form {
   outline: none;
   padding: 0.5rem;
   color: #f1f5f9;
+  width: 100%;
 }
 
 #form-input::placeholder, #input-number::placeholder {
@@ -132,6 +135,15 @@ ul {
   display: block;
 }
 
+.cerrar-btn{
+  background-color:#22c55e;
+  border-radius:0.5rem;
+  color:#cbd5e1;
+  padding: 0.5rem;
+}
+.cerrar-btn:hover{
+  background-color:#dc2626;
+}
 .check-todo {
   /* text-decoration: line-through; */
   border:1px solid yellow;
