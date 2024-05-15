@@ -1,22 +1,35 @@
 {
   "users": [
     {
-      "id": "1420",
+      "id": "a1fc",
       "username": "merwil"
+    },
+    {
+      "id": "c853",
+      "username": "diego"
     }
   ],
   "Contactos": [
     {
-      "id": "e07d",
-      "nombre": "Qeee Waaaa",
+      "id": "6cc5",
+      "nombre": "Hola Hola",
       "telefono": "02127894561",
-      "edit": true
+      "edit": false,
+      "user": "merwil"
     },
     {
-      "id": "011c",
-      "nombre": "Cssss Vsssss",
+      "id": "69c1",
+      "nombre": "Zxxx Zxxx",
       "telefono": "02127894561",
-      "edit": false
+      "edit": false,
+      "user": "diego"
+    },
+    {
+      "id": "3e10",
+      "nombre": "Qeee Waaaa",
+      "telefono": "04140000000",
+      "edit": false,
+      "user": "merwil"
     }
   ]
 }
