@@ -70,7 +70,8 @@ form.addEventListener('submit' , async e =>{
         body:JSON.stringify({
             nombre:formInput.value,
             telefono:inputNumber.value,
-            edit:false
+            edit:false,
+            user:user.username
         })
     })
     const response = await responseJSON.json()
@@ -104,9 +105,9 @@ const getContact = async()=>{
     // console.log(user.username);
     // console.log(contact.nombre , contact.telefono);
     
-    let userContacts = contacts.filter(contact => user == user.username);
-    userContacts = contacts // revisar aqui ! el filtro 
-    console.log(userContacts);
+    let userContacts = contacts.filter(contact => contact.user == user.username);
+    // userContacts = contacts // revisar aqui ! el filtro 
+    // console.log(userContacts);
     userContacts.forEach(contac => {
         const listItem = document.createElement('li')
         listItem.innerHTML=`
@@ -184,7 +185,8 @@ todosList.addEventListener('click', async e=>{
                             id:contact.id,
                             nombre:nameEdit_1.innerHTML,
                             telefono:numberEdit_1.innerHTML,
-                            edit:false
+                            edit:false,
+                            user:user.username
                         }
                     }
                     return contact
