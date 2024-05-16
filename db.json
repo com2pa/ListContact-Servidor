@@ -1,33 +1,26 @@
 {
   "users": [
     {
-      "id": "a1fc",
+      "id": "707d",
       "username": "merwil"
     },
     {
-      "id": "c853",
+      "id": "acfe",
       "username": "diego"
     }
   ],
   "Contactos": [
     {
-      "id": "6cc5",
-      "nombre": "Hola Hola",
-      "telefono": "02127894561",
-      "edit": false,
-      "user": "merwil"
-    },
-    {
-      "id": "69c1",
-      "nombre": "Zxxx Zxxx",
-      "telefono": "02127894561",
+      "id": "cefe",
+      "nombre": "Jee Je",
+      "telefono": "02121234567",
       "edit": false,
       "user": "diego"
     },
     {
-      "id": "3e10",
-      "nombre": "Qeee Waaaa",
-      "telefono": "04140000000",
+      "id": "8364",
+      "nombre": "Nomre Apellid",
+      "telefono": "02128745632",
       "edit": false,
       "user": "merwil"
     }
